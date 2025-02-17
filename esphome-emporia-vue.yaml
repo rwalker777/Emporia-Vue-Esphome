@@ -1,6 +1,8 @@
 substitutions:
   name: "emporia-vue"
   friendly_name: "Emporia Vue"
+  # Enable for more than 1 Emporia Vue
+  name_add_mac_suffix: false
   # Flash write interval should be set to 24-48 hours to prolong lifespan
   flash_write_interval: "48h"
   # Average all raw readings together over a X second span
@@ -58,7 +60,8 @@ substitutions:
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  device_description: "Emporia Vue 16 channel energy monitor"
+  name_add_mac_suffix: "${name_add_mac_suffix}"
+  comment: "Emporia Vue 16 channel energy monitor"
   project:
     name: "Emporia Vue Esphome"
     version: "1.0"

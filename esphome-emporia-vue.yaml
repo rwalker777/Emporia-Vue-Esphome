@@ -2,7 +2,7 @@ substitutions:
   name: "emporia-vue"
   friendly_name: "Emporia Vue"
   # Enable for more than 1 Emporia Vue
-  name_add_mac_suffix: false
+  name_add_mac_suffix: "false"
   # Flash write interval should be set to 24-48 hours to prolong lifespan
   flash_write_interval: "48h"
   # Average all raw readings together over a X second span

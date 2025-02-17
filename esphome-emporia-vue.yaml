@@ -18,8 +18,8 @@ substitutions:
   # Main power calibration - default is 0.022
   # To calculate new calibration value use the formula <current calibration value> * <accurate voltage> / <reporting voltage> 
   # Example the current calibration is 0.022 and reporting 123 volts, but volt meter reads 119 - 0.022 * 119 / 123 = 0.0212
-  phase_a_calibration: 0.022
-  phase_b_calibration: 0.022
+  phase_a_calibration: "0.022"
+  phase_b_calibration: "0.022"
   # CT clamp phase setting (should be phase_a or phase_b)
   ct1_phase: phase_a
   ct2_phase: phase_a
@@ -38,22 +38,22 @@ substitutions:
   ct15_phase: phase_a
   ct16_phase: phase_a
   # CT clamp power mulitplier (Change to 2 for 240v with 1 CT clamp)
-  ct1_multiply: 1
-  ct2_multiply: 1
-  ct3_multiply: 1
-  ct4_multiply: 1
-  ct5_multiply: 1
-  ct6_multiply: 1
-  ct7_multiply: 1
-  ct8_multiply: 1
-  ct9_multiply: 1
-  ct10_multiply: 1
-  ct11_multiply: 1
-  ct12_multiply: 1
-  ct13_multiply: 1
-  ct14_multiply: 1
-  ct15_multiply: 1
-  ct16_multiply: 1
+  ct1_multiply: "1"
+  ct2_multiply: "1"
+  ct3_multiply: "1"
+  ct4_multiply: "1"
+  ct5_multiply: "1"
+  ct6_multiply: "1"
+  ct7_multiply: "1"
+  ct8_multiply: "1"
+  ct9_multiply: "1"
+  ct10_multiply: "1"
+  ct11_multiply: "1"
+  ct12_multiply: "1"
+  ct13_multiply: "1"
+  ct14_multiply: "1"
+  ct15_multiply: "1"
+  ct16_multiply: "1"
     
 ##########End of substitutions###################################################################################################################################################
 
@@ -63,8 +63,8 @@ esphome:
   name_add_mac_suffix: "${name_add_mac_suffix}"
   comment: "Emporia Vue 16 channel energy monitor"
   project:
-    name: "Emporia Vue Esphome"
-    version: "1.0"
+    name: "Esphome.Emporia Vue Esphome"
+    version: "2025.2.1"
 
 external_components:
   - source: github://emporia-vue-local/esphome@vue3

@@ -137,6 +137,10 @@ wifi:
   # Wifi credentials are stored securely by new device wizard.
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  on_connect:
+    - light.turn_on: wifi_led
+  on_disconnect:
+    - light.turn_off: wifi_led
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -173,14 +177,12 @@ rtttl:
   on_finished_playback:
     - logger.log: 'Song ended!'
 
+# The restart button platform allows you to restart your node remotely through Home Assistant.
 button:
   - platform: template
     name: "Two Beeps"
     on_press:
       - rtttl.play: "two short:d=4,o=5,b=100:16e6,16e6"
-
-# The restart button platform allows you to restart your node remotely through Home Assistant.
-button:
   - platform: restart
     name: Restart
     id: restart_button

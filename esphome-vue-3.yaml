@@ -105,12 +105,9 @@ esp32:
 # Enable Home Assistant API
 api:
   reboot_timeout: "${reboot_timeout}"
-  encryption:
-    key: !secret api_encryption
 
 ota:
   - platform: esphome
-    password: !secret ota_password
 
 # Enable logging
 logger:

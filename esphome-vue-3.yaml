@@ -126,6 +126,18 @@ time:
   - &abs
     # take the absolute value of the value
     lambda: 'return abs(x);'
+  - &zero
+    # Use for disconnected circuits to return 0
+    lambda: "return 0.0f;"
+  # moving_avg - digitalblur
+  - &moving_avg
+    # we capture a new sample every 0.24 seconds, so the time can
+    # be calculated from the number of samples as n * 0.24.
+    sliding_window_moving_average:
+      # we average over the past 2.88 seconds
+      window_size: 24
+      # we push a new value every 1.44 seconds
+      send_every: 12
 
 sensor:
   - platform: emporia_vue
@@ -155,16 +167,9 @@ sensor:
       # Do not specify a name for any of the power sensors here, only an id. This leaves the power sensors internal to ESPHome.
       # Copy sensors will filter and then send power measurements to HA
       # These non-throttled power sensors are used for accurately calculating energy
-      - phase_id: phase_a
-        input: "A"  # Verify the CT going to this device input also matches the phase/leg
-        power:
-          id: phase_a_power
-          filters: [*pos]
-      - phase_id: phase_b
-        input: "B"  # Verify the CT going to this device input also matches the phase/leg
-        power:
-          id: phase_b_power
-          filters: [*pos]
+      - { input: "A", phase_id: phase_a, power: { id: phase_a_power, filters: *pos } }
+      - { input: "B", phase_id: phase_b, power: { id: phase_b_power, filters: *pos } }
+      # Verify the correct input on the device is connected to the CT clamp phase defined (Vue 3 inputs are inverted)
       # Pay close attention to set the phase_id for each breaker by matching it to the phase/leg it connects to in the panel
       - { input:  "1", phase_id: "${ct1_phase}", power: { id:  cir1, filters: [ *pos, multiply: "${ct1_multiply}" ] } }
       - { input:  "2", phase_id: "${ct2_phase}", power: { id:  cir2, filters: [ *pos, multiply: "${ct2_multiply}" ] } }

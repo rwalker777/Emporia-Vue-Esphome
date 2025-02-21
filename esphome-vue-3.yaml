@@ -108,14 +108,6 @@ api:
   encryption:
     key: !secret api_encryption
 
-  services:
-    - service: play_rtttl
-      variables:
-        song_str: string
-      then:
-        - rtttl.play:
-            rtttl: !lambda 'return song_str;'
-
 ota:
   - platform: esphome
     password: !secret ota_password
@@ -164,38 +156,17 @@ preferences:
   # sensors below.
   flash_write_interval: "${flash_write_interval}"
 
-output:
-  - platform: ledc
-    pin: GPIO12
-    id: buzzer
-  - platform: gpio
-    pin: GPIO27
-    id: buzzer_gnd
-
-rtttl:
-  output: buzzer
-  on_finished_playback:
-    - logger.log: 'Song ended!'
-
 # The restart button platform allows you to restart your node remotely through Home Assistant.
 button:
-  - platform: template
-    name: "Two Beeps"
-    on_press:
-      - rtttl.play: "two short:d=4,o=5,b=100:16e6,16e6"
   - platform: restart
     name: Restart
     id: restart_button
     icon: mdi:restart
-    on_press:
-      - rtttl.play: "two short:d=4,o=5,b=100:16e6,16e6"
 
   - platform: safe_mode
     name: Restart (Safe Mode)
     id: safe_mode_button
     icon: mdi:restart-alert
-    on_press:
-      - rtttl.play: "two short:d=4,o=5,b=100:16e6,16e6"
 
 # Configure the two status LEDs on the Emporia Vue v3 case
 # https://github.com/emporia-vue-local/esphome/discussions/264#discussioncomment-9788390
